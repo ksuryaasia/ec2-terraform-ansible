@@ -44,13 +44,19 @@ resource "aws_network_interface" "my-ec2-network-interface" {
 
 data "aws_ami" "app_ami" {
   most_recent = true
-  #owners = ["amazon"]
-   owners = ["centos"]
+
+  #owners = ["CentOS"]
+   
 
   filter {
     name   = "name"
     #values = ["amzn2-ami-hvm*"]       #reference -- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html , https://access.redhat.com/solutions/15356
-    values = ["CentOS"]
+    values = ["CentOS-7*"]
+  }
+  
+  filter {
+      name   = "architecture"
+      values = ["x86_64"]
   }
 }
 
