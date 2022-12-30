@@ -16,3 +16,6 @@ variable "region" {
 variable "availability_zone" {
   default = "us-west-2a"
 }
+variable "key_name" {
+  default = "AWSKey.pem"
+}

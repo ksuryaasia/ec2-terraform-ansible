@@ -1,15 +1,3 @@
-terraform {
-  required_version = ">= 0.13.1"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.20.0"
-
-    }
-  }
-}
-
 provider "aws" {
   region = var.region
 }
@@ -60,12 +48,20 @@ data "aws_ami" "app_ami" {
   }
 }
 
+resource "tls_private_key" "rsa-key" {
+  algorithm   = "RSA"
+}
+
+resource "aws_key_pair" "generated_key" {
+  key_name   = var.key_name
+  public_key = tls_private_key.rsa-key.public_key_openssh
+}
 
 resource "aws_instance" "test-vm" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
   count         = 1
-  key_name      = "ec2-key" # Create the key pair and provide key
+  key_name      = aws_key_pair.generated_key.key_name
 
   network_interface {
     network_interface_id = aws_network_interface.my-ec2-network-interface.id
@@ -76,4 +72,9 @@ resource "aws_instance" "test-vm" {
     "Name" = "Test-VM-Using-Terraform"
   }
 
+}
+
+output "private_key" {
+  value     = tls_private_key.rsa-key.private_key_pem
+  sensitive = true
 }
