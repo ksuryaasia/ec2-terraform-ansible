@@ -25,7 +25,7 @@ resource "aws_vpc" "custom-vpc" {
 resource "aws_subnet" "mysubnet" {
   vpc_id = aws_vpc.custom-vpc.id
   cidr_block = var.subnet
-  availability_zone = "us-west-2a"
+  availability_zone = var.availability_zone
   
    tags = {
      "Name" = "My-VPC-Using-Terraform"

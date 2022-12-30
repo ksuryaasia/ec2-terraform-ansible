@@ -12,3 +12,7 @@ variable "instance_type" {
 variable "region" {
   default = "us-west-2"
 }
+
+variable "availability_zone" {
+  default = "us-west-2a"
+}
