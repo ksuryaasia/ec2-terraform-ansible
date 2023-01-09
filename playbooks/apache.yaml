@@ -1,8 +1,8 @@
 -
   name: Playbook to setup apache Server
 
-  hosts: controlnode
-  gather_facts: yes
+  hosts: localhost
+  gather_facts: false
   become: true
   become_method: sudo
   become_user: root
