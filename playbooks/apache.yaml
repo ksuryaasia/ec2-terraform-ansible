@@ -1,9 +1,9 @@
 -
   name: Playbook to setup apache Server
-  #gather_facts: yes
-  hosts: localhost
+  gather_facts: yes
+  hosts: controlnode
   become: true
-  #become_method: sudo
+  become_method: sudo
   become_user: root
   tasks:
     - name: Install Apache package
