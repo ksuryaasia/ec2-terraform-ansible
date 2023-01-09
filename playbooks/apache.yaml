@@ -2,6 +2,9 @@
   name: Playbook to setup apache Server
   gather_facts: yes
   hosts: localhost
+  become: true
+  become_method: sudo
+  become_user: root
   tasks:
     - name: Install Apache package
       yum:
