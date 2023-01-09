@@ -10,7 +10,7 @@
       yum:
         name: httpd
         state: present
-      use_backend: "yum"
+        use_backend: "yum"
     - name: Modifying the contents of index.html page
       copy:
         dest: "/var/www/html/index.html"
