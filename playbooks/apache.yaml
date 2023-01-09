@@ -2,6 +2,7 @@
   name: Playbook to setup apache Server
 
   hosts: localhost
+  gather_facts: yes
   become: true
   become_method: sudo
   become_user: root
