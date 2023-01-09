@@ -13,4 +13,12 @@ pipeline{
         }
         } 
     }
+  post {
+      success {
+            echo 'Sucessfully executed the Ansible Playbook'
+        }
+       failure {
+            echo 'Job Failed, Please Check !!'
+        }
+     }
 }
