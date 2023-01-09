@@ -3,6 +3,8 @@ Author : KHAJA EHTESHAMUDDIN AHMED
 
 This Repo illustrates to help us with setting the aws insfrastructure using terraform.
 
+We can use our ansible playbooks with the help of Jenkins server to configure the servers, with the help of Jenkins File.
+
 
 
 1. Install Java, Jenkins and Ansible
