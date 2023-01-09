@@ -1,0 +1,27 @@
+-
+  name: Playbook to setup apache Server
+  gather_facts: yes
+  hosts: controlnode
+  tasks:
+    - name: Install Apache package
+      yum:
+        name: httpd
+        state: present
+    - name: Modifying the contents of index.html page
+      copy:
+        dest: /var/www/html/index.html
+        content: "<h1>This is a Webpage created using Ansible through Jenkins</h1>"
+
+    - name: Allow the port in firewall
+      firewalld:
+        zone: public
+        port: 80/tcp
+        permanent: true
+        state: enabled
+        immediate: true
+
+    - name: Start the Apache service
+      systemd:
+        name: httpd
+        state: started
+        enabled: true
