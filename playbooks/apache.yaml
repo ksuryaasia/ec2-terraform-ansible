@@ -27,3 +27,7 @@
         name: httpd
         state: started
         enabled: true
+        
+    - name: Check the Apache URL connectivity
+      ansible.builtin.uri:
+        url: http://192.168.0.107
