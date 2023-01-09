@@ -1,6 +1,6 @@
 -
   name: Playbook to setup apache Server
-  gather_facts: false
+  gather_facts: yes
   hosts: localhost
   become: true
   become_method: sudo
