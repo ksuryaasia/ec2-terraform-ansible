@@ -1,6 +1,7 @@
 
 provider "aws" {
   region = var.region
+  shared_credentials_file = var.shared_credentials_file
 }
 
 resource "aws_vpc" "custom-vpc" {
@@ -73,6 +74,13 @@ resource "aws_instance" "test-vm" {
     "Name" = "Test-VM-Using-Terraform"
   }
 
+
+   connection {
+    type     = "ssh"
+    user     = "root"
+    password = var.root_password
+    host     = self.public_ip
+  }
   provisioner "file" {
     source      = "scripts/ansible-setup.sh"
     destination = "/root/script.sh"
@@ -87,7 +95,7 @@ resource "aws_instance" "test-vm" {
     inline = [
       "chmod +x /root/script.sh",
       "/root/script.sh",
-      "ansible-playbook /root/jenkins-setup.yaml"
+      "sudo ansible-playbook /root/jenkins-setup.yaml"
     ]
   }
 }

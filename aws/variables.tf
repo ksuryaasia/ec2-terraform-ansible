@@ -19,3 +19,7 @@ variable "availability_zone" {
 variable "key_name" {
   default = "AWSKey.pem"
 }
+
+variable "shared_credentials_file"{
+  default = "/home/devops/.aws/credentials"
+}
