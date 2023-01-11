@@ -73,6 +73,31 @@ resource "aws_instance" "test-vm" {
     "Name" = "Test-VM-Using-Terraform"
   }
 
+   provisioner "file" {
+    source      = "scripts/ansible-setup.sh"
+    destination = "/root/script.sh"
+  }
+
+    provisioner "file" {
+    source      = "playbooks/jenkins-setup.yaml"
+    destination = "/root/jenkins-setup.yaml"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /root/script.sh",
+      "/root/script.sh",
+      "ansible-playbook /root/jenkins-setup.yaml"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
+  }
+
 }
 
 output "private_key" {
