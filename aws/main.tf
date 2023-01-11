@@ -90,14 +90,6 @@ resource "aws_instance" "test-vm" {
       "ansible-playbook /root/jenkins-setup.yaml"
     ]
   }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/script.sh",
-      "/tmp/script.sh args",
-    ]
-  }
-
 }
 
 output "private_key" {
