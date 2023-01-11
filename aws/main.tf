@@ -3,7 +3,7 @@ provider "aws" {
   region = var.region
   shared_credentials_file = var.shared_credentials_file
 }
-
+/*
 resource "aws_vpc" "custom-vpc" {
   cidr_block = var.vpc
 
@@ -104,3 +104,4 @@ output "private_key" {
   value     = tls_private_key.rsa-key.private_key_pem
   sensitive = true
 }
+*/
