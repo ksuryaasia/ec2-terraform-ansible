@@ -3,7 +3,7 @@ provider "aws" {
   region = var.region
   shared_credentials_file = var.shared_credentials_file
 }
-/*
+
 resource "aws_vpc" "custom-vpc" {
   cidr_block = var.vpc
 
@@ -74,10 +74,10 @@ resource "aws_instance" "test-vm" {
     "Name" = "Test-VM-Using-Terraform"
   }
 
-
+/*
    connection {
     type     = "ssh"
-    user     = "root"
+    user     = "centos"
     password = var.root_password
     host     = self.public_ip
   }
@@ -98,10 +98,6 @@ resource "aws_instance" "test-vm" {
       "sudo ansible-playbook /root/jenkins-setup.yaml"
     ]
   }
+*/
 }
 
-output "private_key" {
-  value     = tls_private_key.rsa-key.private_key_pem
-  sensitive = true
-}
-*/
