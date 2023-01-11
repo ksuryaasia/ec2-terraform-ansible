@@ -50,7 +50,7 @@ data "aws_ami" "app_ami" {
 }
 
 resource "tls_private_key" "rsa-key" {
-  algorithm   = "RSA"
+  algorithm = "RSA"
 }
 
 resource "aws_key_pair" "generated_key" {
@@ -73,12 +73,12 @@ resource "aws_instance" "test-vm" {
     "Name" = "Test-VM-Using-Terraform"
   }
 
-   provisioner "file" {
+  provisioner "file" {
     source      = "scripts/ansible-setup.sh"
     destination = "/root/script.sh"
   }
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "playbooks/jenkins-setup.yaml"
     destination = "/root/jenkins-setup.yaml"
   }
