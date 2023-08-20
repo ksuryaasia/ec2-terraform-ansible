@@ -1,6 +1,6 @@
 
 provider "aws" {
-  region                   = var.region
+  region                   = var.regions
   shared_credentials_files = ["C:\\Users\\EHTESHAM\\.aws\\credentials"]
 }
 
