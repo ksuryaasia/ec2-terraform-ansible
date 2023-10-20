@@ -10,6 +10,7 @@ pipeline{
          dir('playbook'){
            git poll: true, branch: master, url: "https://github.com/ehteshamkhaja/terraform-ansible-ubuntu22.git"
          }
+        }
       stage('Terrform Init and Run terraform  Plan'){
        steps {
          dir('terraform') {
