@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+    stages {
+      stage('git copy terraform code'){
+         dir('terraform'){
+           git poll: true, branch: master, url: "https://github.com/ehteshamkhaja/ec2-instance-creation-using-terraform.git"
+         }
+      }
+       stage('git copy playbook'){
+         dir('playbook'){
+           git poll: true, branch: master, url: "https://github.com/ehteshamkhaja/terraform-ansible-ubuntu22.git"
+         }
+      stage('Terrform Init and Run terraform  Plan'){
+       steps {
+         dir('terraform') {
+             sh 'terraform init && terraform plan'
+          }
+        }
+      }
+       stage('Provision VM using terraform') {
+    steps{
+      dir('terraform'){
+      sh 'terraform apply --auto-approve'
+     }
+    }
+    } 
+   stage('Apply patches on the Provisioned VMs'){
+ steps{
+     sh 'ansible-playbook  -i /var/lib/jenkins/inventory/hosts playbook/ubuntu-22-patch/site.yml'
+    }
+    
+    }
+    }
