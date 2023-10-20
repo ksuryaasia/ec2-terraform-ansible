@@ -29,6 +29,6 @@ pipeline{
  steps{
      sh 'ansible-playbook  -i /var/lib/jenkins/inventory/hosts playbook/ubuntu-22-patch/site.yml'
     }
-    
     }
     }
+}
