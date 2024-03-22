@@ -80,7 +80,6 @@ def commitCode(targetBranch, localBranchPath, fileName, commitMsg) {
         git add $fileName
         git diff --staged --quiet || git commit -m  '$commitMsg'
         echo ${targetBranch}
-        git remote add origin $GITURL
-        git push -u origin ${targetBranch}
+        git push
     """
 }
