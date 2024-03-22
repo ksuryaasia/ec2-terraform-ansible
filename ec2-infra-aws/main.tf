@@ -19,7 +19,7 @@ terraform {
 
 provider "aws" {
   # Configuration options
-   region                   = var.regions
+   region                   = var.region
   shared_credentials_files = ["/var/lib/jenkins/.aws/credentials"]
 }
 
