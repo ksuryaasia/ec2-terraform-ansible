@@ -67,7 +67,7 @@ node ("$ENV") {
 
 
      stage("Push the State file to GIT"){
-       commitCode("$branch", "../$mainDir", "ec2-infra-aws/$statefile", "Latest state file committed")
+       commitCode("$branch", "./$mainDir", "ec2-infra-aws/$statefile", "Latest state file committed")
      } //stage
      
 }//node

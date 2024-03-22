@@ -2,6 +2,5 @@
 credentials.txt
 .terraform/*
 .terraform.lock.hcl
-terraform.tfstate*
 *.pem
 ec2-key
