@@ -23,8 +23,9 @@ node ("$ENV") {
    }// stage 
     
      stage("Terraform Initialization and Plan"){
-        withAWS(credentials: 'AWS-Credentials') {
+        
         try {
+        withAWS(credentials: 'AWS-Credentials') {    
          sh """
              cd ./cloud/ec2-infra-aws
              echo 'Running Terraform init'
@@ -38,17 +39,18 @@ node ("$ENV") {
          
          sh 'echo "Terraform plan is reviewed and approved now !!!"' 
          }
-        
+        } 
         catch (exc) {
             print "Terraform init/plan failed"
             error('Aborting the pipeline' + exc)
         } //catch
-        }  
+         
     } //stage
 
     stage("Terraform Apply"){
-     withAWS(credentials: 'AWS-Credentials') {
+     
        try {
+        withAWS(credentials: 'AWS-Credentials') {
         sh """
         cd ./cloud/ec2-infra-aws
         set +x && terraform apply $Approval 
@@ -73,7 +75,7 @@ def commitCode(targetBranch, localBranchPath, fileName, commitMsg) {
         cd $localBranchPath
         git add $fileName
         git diff --staged --quiet || git commit -m  '$commitMsg'
-        echo $(targetBranch)
+        echo ${targetBranch}
         git push -u origin ${targetBranch}
     """
 }
