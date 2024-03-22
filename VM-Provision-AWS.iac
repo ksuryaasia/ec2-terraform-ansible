@@ -53,7 +53,7 @@ node ("$ENV") {
         withAWS(credentials: 'AWS-Credentials') {
         sh """
         cd ./cloud/ec2-infra-aws
-        set +x && terraform apply $Approval 
+        set +x && terraform $action $Approval 
            
         """
        }
