@@ -37,13 +37,13 @@ node ("$ENV") {
          input message: 'Are you sure you want to apply these changes?', ok: 'Yes'
          
          sh 'echo "Terraform plan is reviewed and approved now !!!"' 
-        }
-        } 
+         }
+        
         catch (exc) {
             print "Terraform init/plan failed"
             error('Aborting the pipeline' + exc)
         } //catch
-         
+        }  
     } //stage
 
     stage("Terraform Apply"){
