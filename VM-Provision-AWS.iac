@@ -15,8 +15,8 @@ node ("$ENV") {
         ENVNAME = "PR"
     }
 
-   try {
-       stage ('Fetch GIT code')
+   
+       stage ('Fetch GIT code'){
        dir (mainDir){
          git poll: true, branch: "$branch", url: "https://github.com/ehteshamkhaja/ec2-instance-creation-using-terraform.git"
        }// dir
@@ -38,7 +38,8 @@ node ("$ENV") {
          
          sh 'echo "Terraform plan is reviewed and approved now !!!"' 
         }
-        } catch (exc) {
+        } 
+        catch (exc) {
             print "Terraform init/plan failed"
             error('Aborting the pipeline' + exc)
         } //catch
