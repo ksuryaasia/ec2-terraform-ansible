@@ -28,6 +28,9 @@ resource "aws_instance" "jenkins" {
   ami           = "ami-0fc5d935ebf8bc3bc"
   instance_type = "t2.micro"
   key_name      = "tf-key-pair-${random_id.server.hex}"
+  depends_on = [
+    aws_key_pair.tf-key-pair
+  ]
  #vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
   tags = {
     Name        = "Jenkins"
