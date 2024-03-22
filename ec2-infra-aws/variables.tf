@@ -1,6 +1,9 @@
 variable "vpc"{
     default = "172.16.0.0/16"
 }
+variable "region"{
+    default = "us-east-1"
+}
 
 
 variable "availability_zone" {

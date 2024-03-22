@@ -54,5 +54,5 @@ resource "local_file" "tf-key" {
 
 
 output "server_private_ip" {
-  value = aws_instance.web.private_ip
+  value = aws_instance.jenkins.private_ip
 }
