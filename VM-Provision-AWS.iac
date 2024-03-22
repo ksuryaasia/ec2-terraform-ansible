@@ -23,7 +23,7 @@ node ("$ENV") {
    }// stage 
     
      stage("Terraform Initialization and Plan"){
-         withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+        withAWS(credentials: 'AWS-Credentials') {
         try {
          sh """
              cd ./cloud/ec2-infra-aws
@@ -46,7 +46,7 @@ node ("$ENV") {
     } //stage
 
     stage("Terraform Apply"){
-    withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+     withAWS(credentials: 'AWS-Credentials') {
        try {
         sh """
         cd ./cloud/ec2-infra-aws
