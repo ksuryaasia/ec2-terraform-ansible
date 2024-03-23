@@ -1,5 +1,6 @@
 import groovy.json.*
 
+// SCRIPTED PIPELINE
 node ("$ENV") {
 
      deleteDir ()
