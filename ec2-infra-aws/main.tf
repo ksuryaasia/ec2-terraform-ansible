@@ -60,7 +60,7 @@ resource "local_file" "ansible_inventory" {
   
   content = templatefile("${path.module}/../templates/inventory.tftpl",
      {
-      ip = "${join("\n", ${aws_instance.*.private_ip})}"
+      ip = "${join("\n", ${aws_instance.jenkins.private_ip})}"
     }
 
   )
