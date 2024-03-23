@@ -9,5 +9,5 @@ resource "local_file" "ansible_inventory" {
     ip_addrs = [for i in aws_instance.jenkins:i.public_ip]
     ssh_keyfile = local_sensitive_file.private_key.filename
   })
-  filename = format("%s/%s", abspath(path.root), "inventory.ini")
+  filename = format("%s/%s", abspath("${path.root}/ansible"), "inventory.ini")
 }
