@@ -61,7 +61,7 @@ resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/../templates/inventory.tftpl", {
     ips = aws_instance.web.*.public_ip
   })
-  filename = format("%s/%s", abspath(path.root), "inventory.ini")
+  filename = format("%s/%s", abspath("${path.module}/../playbooks/"), "inventory.ini")
 }
 
 output "server_private_ip" {
