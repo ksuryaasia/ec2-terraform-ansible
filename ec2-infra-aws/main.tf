@@ -24,7 +24,7 @@ provider "aws" {
 }
 
 
-resource "aws_instance" "jenkins" {
+resource "aws_instance" "web" {
   ami           = "ami-0fc5d935ebf8bc3bc"
   instance_type = "t2.micro"
   key_name      = "tf-key-pair-${random_id.server.hex}"
@@ -58,13 +58,11 @@ resource "local_file" "tf-key" {
 
 resource "local_file" "ansible_inventory" {
   
-  content = templatefile("${path.module}/../templates/inventory.tftpl", {
-      ip = "${join("\n", ${aws_instance.jenkins.private_ip})}"
-    }
-
-  )
- filename        = "${path.module}/playbooks/ansible_inventory.ini"
-  file_permission = "0644"
+  filename = “./inventory/hosts.ini”
+ content = <<EOF
+ [web]
+  ${aws_instance.web[*].public_ip}
+EOF
   depends_on = [
     aws_instance.jenkins
   ]
