@@ -71,6 +71,10 @@ node ("$ENV") {
             ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible', inventory: 'playbooks/inventory.ini', playbook: 'playbooks/apache.yaml', vaultTmpPath: '' 
            
         }
+         catch (exc) {
+            print "Ansible playbook execution failed"
+            error('Aborting the pipeline' + exc)
+        }//catch 
      }
 
 
