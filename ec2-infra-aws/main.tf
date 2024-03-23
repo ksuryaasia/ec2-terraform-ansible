@@ -57,20 +57,15 @@ resource "local_file" "tf-key" {
 
 
 resource "local_file" "ansible_inventory" {
-  
-  filename = “./inventory/hosts.ini”
- content = <<EOF
- [web]
-  ${aws_instance.web[*].public_ip}
-EOF
-  depends_on = [
-    aws_instance.jenkins
-  ]
+  content = templatefile("${path.module}/../templates/inventory.tftpl", {
+    ips = [for i in aws_instance.web:i.public_ip]
+  })
+  filename = format("%s/%s", abspath(path.root), "inventory.ini")
 }
 
 output "server_private_ip" {
-  value = aws_instance.jenkins.private_ip
+  value = aws_instance.web.private_ip
 }
 output "server_public_ip" {
-  value = aws_instance.jenkins.public_ip
+  value = aws_instance.web.public_ip
 }
