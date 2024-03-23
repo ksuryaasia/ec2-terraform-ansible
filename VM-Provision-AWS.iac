@@ -65,15 +65,14 @@ node ("$ENV") {
         }//catch 
     
      }//stage
-/*
-     stage("Fetching the Server IP for Post provisioning"){
+
+     stage("Executing ansible playbook to install Apache Server"){
         try{
-            sh """
-             cd ./cloud/ec2-infra-aws && terraform output {server_public_ip}
-            """
+            ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible', inventory: 'playbooks/inventory.ini', playbook: 'playbooks/apache.yaml', vaultTmpPath: '' 
+           
         }
      }
-*/
+
 
      stage("Push the State file to GIT"){
        commitCode("$branch", "./$mainDir", "ec2-infra-aws/$statefile", "Latest state file committed")
