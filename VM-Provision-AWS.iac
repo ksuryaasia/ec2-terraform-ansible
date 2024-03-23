@@ -47,7 +47,7 @@ node ("$ENV") {
          
     } //stage
 
-    stage("Terraform Apply"){
+    stage("Terraform $action"){
      
        try {
         withAWS(credentials: 'AWS-Credentials') {
