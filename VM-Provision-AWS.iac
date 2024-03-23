@@ -74,7 +74,7 @@ node ("$ENV") {
      stage("Executing ansible playbook to install Apache Server"){
         try{
             
-            ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible', inventory: 'cloud/playbooks/inventory.ini', playbook: 'cloud/playbooks/apache.yaml', vaultTmpPath: '' 
+            ansiblePlaybook disableHostKeyChecking: false, installation: 'ansible', inventory: 'cloud/playbooks/inventory.ini', playbook: 'cloud/playbooks/apache.yaml', vaultTmpPath: '' 
            
         }
          catch (exc) {
