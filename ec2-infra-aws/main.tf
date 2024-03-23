@@ -62,19 +62,3 @@ output "server_private_ip" {
 output "server_public_ip" {
   value = aws_instance.jenkins.public_ip
 }
-
-resource "local_file" "ansible_inventory" {
-  content = templatefile("inventory.tmpl",
-    {
-     [aws_ec2]
-     %{ for addr in ip_addrs ~}
-      ${addr}
-     %{ endfor ~}
-
-     [aws_ec2:vars]
-      ansible_ssh_user=ubuntu
-      ansible_ssh_private_key_file=${ssh_keyfile}
-    }
-  )
-  filename = "ansible/inventory"
-}
