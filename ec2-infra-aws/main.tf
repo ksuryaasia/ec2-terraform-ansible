@@ -58,14 +58,13 @@ resource "local_file" "tf-key" {
 
 resource "local_file" "ansible_inventory" {
   
-  content = templatefile("${path.module}/templates/inventory.tmpl",
-     # ip_addrs = [for i in aws_instance.server:i.public_ip]
-      ips = for i in aws_instance.server:i.public_ip 
+  content = templatefile("${path.module}/templates/inventory.tftpl",
+     {
+      inst_ip = "${join("\n", ${aws_instance.*.private_ip})}"
+    }
 
   )
-
-
-  filename        = "${path.module}/playbooks/ansible_inventory.ini"
+ filename        = "${path.module}/playbooks/ansible_inventory.ini"
   file_permission = "0644"
   depends_on = [
     aws_instance.jenkins
