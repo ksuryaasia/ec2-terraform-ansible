@@ -28,6 +28,7 @@ resource "aws_instance" "web" {
   ami           = "ami-0fc5d935ebf8bc3bc"
   instance_type = "t2.micro"
   key_name      = "tf-key-pair-${random_id.server.hex}"
+  associate_public_ip_address = true
   depends_on = [
     aws_key_pair.tf-key-pair
   ]
@@ -58,7 +59,7 @@ resource "local_file" "tf-key" {
 
 resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/../templates/inventory.tftpl", {
-    ips = [for i in aws_instance.web: i.public_ip]
+    ips = [for i in aws_instance.web:i.public_ip]
   })
   filename = format("%s/%s", abspath(path.root), "inventory.ini")
 }
