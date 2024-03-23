@@ -1,0 +1,9 @@
+[ubuntu_nodes]
+%{ for ip in ubuntu_hosts ~}
+${ip}
+%{ endfor ~}
+
+
+[all:vars]
+ansible_user=devops
+ansible_ssh_private_key_file=local_file.tf-key
