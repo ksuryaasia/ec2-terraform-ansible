@@ -73,6 +73,7 @@ node ("$ENV") {
 }//node
 
 def commitCode(targetBranch, localBranchPath, fileName, commitMsg) {
+   withCredentials([gitUsernamePassword(credentialsId: 'git-login', gitToolName: 'Default')]) {
     sh """
 
         cd $localBranchPath
@@ -84,4 +85,5 @@ def commitCode(targetBranch, localBranchPath, fileName, commitMsg) {
         git config --global user.name "DevOps"
         git push -u origin master
     """
+   }
 }
