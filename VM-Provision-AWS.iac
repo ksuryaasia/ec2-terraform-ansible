@@ -66,6 +66,11 @@ node ("$ENV") {
     
      }//stage
 
+      stage("Push the State file to GIT"){
+       commitCode("$branch", "./$mainDir", "ec2-infra-aws/$statefile", "Latest state file committed")
+     } //stage
+     
+
      stage("Executing ansible playbook to install Apache Server"){
         try{
             
@@ -79,10 +84,7 @@ node ("$ENV") {
      }
 
 
-     stage("Push the State file to GIT"){
-       commitCode("$branch", "./$mainDir", "ec2-infra-aws/$statefile", "Latest state file committed")
-     } //stage
-     
+    
 }//node
 
 def commitCode(targetBranch, localBranchPath, fileName, commitMsg) {
