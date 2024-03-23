@@ -6,7 +6,7 @@ node ("$ENV") {
      deleteDir ()
      def mainDir = "cloud"
      def statefile= "terraform.tfstate"
-    // cleanWs ()
+     cleanWs ()
     def ENVNAME;
     if (ENVNAME != "PR" && ENVNAME != "DR" && ENVNAME != "STG") {
         ENVNAME = 'UAT'
@@ -68,7 +68,7 @@ node ("$ENV") {
 
      stage("Executing ansible playbook to install Apache Server"){
         try{
-            sh ''
+            
             ansiblePlaybook disableHostKeyChecking: true, installation: 'ansible', inventory: 'cloud/playbooks/inventory.ini', playbook: 'cloud/playbooks/apache.yaml', vaultTmpPath: '' 
            
         }
