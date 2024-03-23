@@ -76,11 +76,12 @@ def commitCode(targetBranch, localBranchPath, fileName, commitMsg) {
     sh """
 
         cd $localBranchPath
-        pwd 
+        pwd      
         git add $fileName
         git diff --staged --quiet || git commit -m  '$commitMsg'
         echo ${targetBranch}
         git remote set-url origin ${GITURL}
+        git config --global user.name "DevOps"
         git push -u origin master
     """
 }
