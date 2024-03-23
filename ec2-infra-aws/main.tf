@@ -56,10 +56,16 @@ resource "local_file" "tf-key" {
   filename = "tf-key-pair-${random_id.server.hex}"
 }
 
+resource "local_sensitive_file" "private_key" {
+  content = tls_private_key.rsa.private_key_pem
+  filename          = format("%s/%s/%s", abspath(path.root), ".ssh", "ansible-ssh-key.pem")
+  file_permission   = "0600"
+}
 
 resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/../templates/inventory.tftpl", {
     ips = aws_instance.web.*.public_ip
+    ssh_keyfile = local_sensitive_file.private_key.filename
   })
   filename = format("%s/%s", abspath("${path.module}/../playbooks/"), "inventory.ini")
 }
