@@ -59,7 +59,7 @@ resource "local_file" "tf-key" {
 
 resource "local_file" "ansible_inventory" {
   content = templatefile("${path.module}/../templates/inventory.tftpl", {
-    ips = [for i in aws_instance.web: i.public_ip]
+    ips = [for i in aws_instance.web:i.public_ip]
   })
   filename = format("%s/%s", abspath(path.root), "inventory.ini")
 }
