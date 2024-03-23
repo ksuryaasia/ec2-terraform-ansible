@@ -58,7 +58,7 @@ resource "local_file" "tf-key" {
 
 resource "local_file" "ansible_inventory" {
   
-  content = templatefile("${path.module}/templates/inventory.tftpl",
+  content = templatefile("${path.module}/../templates/inventory.tftpl",
      {
       ip = "${join("\n", ${aws_instance.*.private_ip})}"
     }
