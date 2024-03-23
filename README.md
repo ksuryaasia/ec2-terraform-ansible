@@ -12,6 +12,6 @@ On the Jenkins dashboard, go to Manage Jenkins > Manage Plugins in the Available
 Navigate to Manage Jenkins > Manage Credentials > Jenkins (global) > Global Credentials > Add Credentials.
 
 Next, Add the GIT credentials in Jenkins ( first create the token in the Git)
-
+Select the option as 'Username and Password' and provide username as email id and password as Token generated in GIT.
 <img width="1208" alt="image" src="https://github.com/ehteshamkhaja/ec2-instance-creation-using-terraform/assets/27899831/a5a2a562-da21-47fb-998b-962d1d6b3159">
 
