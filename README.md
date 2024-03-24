@@ -3,6 +3,7 @@ Author : KHAJA EHTESHAMUDDIN AHMED
 
 This Repo illustrates to help us with setting the Apache Web Server using terraform on AWS CLOUD.
 
+Steps are available in reference IAC file VM-Provision-AWS.iac which is used as Scripted Pipeline.
 
 
 Configuring Jenkins
@@ -19,3 +20,6 @@ Next, Add the GIT credentials in Jenkins ( first create the token in the Git)
 Select the option as 'Username and Password' and provide username as email id and password as Token generated in GIT.
 <img width="1208" alt="image" src="https://github.com/ehteshamkhaja/ec2-instance-creation-using-terraform/assets/27899831/a5a2a562-da21-47fb-998b-962d1d6b3159">
 
+Use Project as "Pipeline" and provide the VM-Provision-AWS.iac , provide the below parameteres to the pipeline
+
+ENV-master, branch-master,Approval -> --auto-approve, action -> apply,destroy, GITURL --> https://github.com/ehteshamkhaja/ec2-terraform-ansible.git
