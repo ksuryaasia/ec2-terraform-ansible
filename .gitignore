@@ -4,3 +4,4 @@ credentials.txt
 .terraform.lock.hcl
 *.pem
 ec2-key
+.ssh
