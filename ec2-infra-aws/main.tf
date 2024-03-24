@@ -32,6 +32,7 @@ resource "aws_instance" "web" {
   depends_on = [
     aws_key_pair.tf-key-pair
   ]
+   
  #vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
   tags = {
     Name        = "Jenkins"
