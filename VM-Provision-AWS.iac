@@ -8,13 +8,13 @@ node ("$ENV") {
      def statefile= "terraform.tfstate"
      cleanWs ()
     def ENVNAME;
-    if (ENVNAME != "PR" && ENVNAME != "DR" && ENVNAME != "STG") {
-        ENVNAME = 'UAT'
-    } else if ( ENVNAME == "DR" && ENVNAME == "STG") {
-       ENVNAME = "$ENVNAME"
-    } else {
-        ENVNAME = "PR"
-    }
+    //if (ENVNAME != "PR" && ENVNAME != "DR" && ENVNAME != "STG") {
+    //    ENVNAME = 'UAT'
+    // } else if ( ENVNAME == "DR" && ENVNAME == "STG") {
+    //   ENVNAME = "$ENVNAME"
+   // } else {
+    //    ENVNAME = "PR"
+   // }
 
    
        stage ('Fetch GIT code'){
