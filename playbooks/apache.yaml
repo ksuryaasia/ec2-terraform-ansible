@@ -25,5 +25,14 @@
         name: apache2
         state: restarted
         enabled: true
+    
+    - name: Get the URL to access Webpage 
+      command: echo "http://{{ inventory_hostname }}"
+      register: url
+    
+    - name: print url
+      debug:
+        msg: "Webpage URL : {{ url.stdout }}"
+      
         
     
