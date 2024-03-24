@@ -27,6 +27,12 @@ resource "random_id" "server" {
   byte_length = 8
 }
 
+variable "sg_ports" {
+  type        = list(number)
+  description = "list of ingress ports"
+  default     = [80,22]
+}
+
 resource "aws_security_group" "dynamicsg" {
   name        = "dynamic-sg"
   description = "Ingress for Apache Web Server"
