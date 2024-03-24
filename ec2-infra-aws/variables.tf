@@ -5,6 +5,11 @@ variable "region"{
     default = "us-east-1"
 }
 
+variable "sg_ports" {
+  type        = list(number)
+  description = "list of ingress ports"
+  default     = [80]
+}
 
 variable "availability_zone" {
   default = "us-west-2a"

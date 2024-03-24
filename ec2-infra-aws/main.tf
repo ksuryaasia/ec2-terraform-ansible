@@ -25,12 +25,14 @@ provider "aws" {
 
 
 resource "aws_instance" "web" {
-  ami           = "ami-0f94aee77d07b0094"
+  ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   key_name      = "tf-key-pair-${random_id.server.hex}"
+  vpc_security_group_ids = [aws_security_group.dynamicsg]
   associate_public_ip_address = true
   depends_on = [
-    aws_key_pair.tf-key-pair
+    aws_key_pair.tf-key-pair,
+    aws_security_group.dynamicsg
   ]
    
  #vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
@@ -41,6 +43,33 @@ resource "aws_instance" "web" {
    
   }
 }
+
+resource "aws_security_group" "dynamicsg" {
+  name        = "dynamic-sg"
+  description = "Ingress for Vault"
+
+  dynamic "ingress" {
+    for_each = var.sg_ports
+    iterator = port
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "egress" {
+    for_each = var.sg_ports
+    content {
+      from_port   = egress.value
+      to_port     = egress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+}
+
 resource "random_id" "server" {
   byte_length = 8
 }

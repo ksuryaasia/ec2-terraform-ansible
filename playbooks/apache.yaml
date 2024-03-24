@@ -5,8 +5,8 @@
   become: True
   tasks:
     - name: Install Apache package
-      yum:
-        name: httpd
+      apt:
+        name: apache2
         state: present
        
     - name: Modifying the contents of index.html page
@@ -24,7 +24,7 @@
 
     - name: Start the Apache service
       systemd:
-        name: httpd
+        name: apache2
         state: started
         enabled: true
         
