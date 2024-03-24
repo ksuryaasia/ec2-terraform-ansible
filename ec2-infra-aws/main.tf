@@ -27,29 +27,9 @@ resource "random_id" "server" {
   byte_length = 8
 }
 
-resource "aws_instance" "web" {
-  ami           = "ami-080e1f13689e07408"
-  instance_type = "t2.micro"
-  key_name      = "tf-key-pair-${random_id.server.hex}"
-  vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
-  associate_public_ip_address = true
-  depends_on = [
-    aws_key_pair.tf-key-pair,
-    aws_security_group.dynamicsg
-  ]
-   
- #vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
-  tags = {
-    Name        = "Jenkins"
-    Envrionment = "TST"
-    Application = "SAP"
-   
-  }
-}
-
 resource "aws_security_group" "dynamicsg" {
   name        = "dynamic-sg"
-  description = "Ingress for Vault"
+  description = "Ingress for Apache Web Server"
 
   dynamic "ingress" {
     for_each = var.sg_ports
@@ -73,6 +53,25 @@ resource "aws_security_group" "dynamicsg" {
   }
 }
 
+resource "aws_instance" "web" {
+  ami           = "ami-080e1f13689e07408"
+  instance_type = "t2.micro"
+  key_name      = "tf-key-pair-${random_id.server.hex}"
+  vpc_security_group_ids = "[aws_security_group.dynamicsg.id]"
+  associate_public_ip_address = true
+  depends_on = [
+    aws_key_pair.tf-key-pair,
+    aws_security_group.dynamicsg
+  ]
+   
+ #vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
+  tags = {
+    Name        = "Jenkins"
+    Envrionment = "TST"
+    Application = "SAP"
+   
+  }
+}
 
 resource "aws_key_pair" "tf-key-pair" {
   key_name   = "tf-key-pair-${random_id.server.hex}"
