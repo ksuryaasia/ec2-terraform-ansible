@@ -57,7 +57,7 @@ resource "aws_instance" "web" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   key_name      = "tf-key-pair-${random_id.server.hex}"
-  vpc_security_group_ids = "[aws_security_group.dynamicsg.id]"
+  vpc_security_group_ids = [aws_security_group.dynamicsg.id]
   associate_public_ip_address = true
   depends_on = [
     aws_key_pair.tf-key-pair,
