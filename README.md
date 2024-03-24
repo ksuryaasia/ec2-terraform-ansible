@@ -1,7 +1,7 @@
 
 Author : KHAJA EHTESHAMUDDIN AHMED
 
-This Repo illustrates to help us with setting the aws insfrastructure using terraform.
+This Repo illustrates to help us with setting the Apache Web Server using terraform on AWS CLOUD.
 
 
 
