@@ -70,7 +70,7 @@ node ("$ENV") {
        commitCode("$branch", "./$mainDir", "ec2-infra-aws/$statefile", "Latest state file committed")
      } //stage
      
-
+    if ($action == "apply" ) {
      stage("Executing ansible playbook to install Apache Server"){
         try{
             
@@ -82,7 +82,7 @@ node ("$ENV") {
             error('Aborting the pipeline' + exc)
         }//catch 
      }
-
+    }
 
     
 }//node
