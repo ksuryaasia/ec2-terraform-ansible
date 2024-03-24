@@ -23,12 +23,15 @@ provider "aws" {
   shared_credentials_files = ["/var/lib/jenkins/.aws/credentials"]
 }
 
+resource "random_id" "server" {
+  byte_length = 8
+}
 
 resource "aws_instance" "web" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   key_name      = "tf-key-pair-${random_id.server.hex}"
-  vpc_security_group_ids = [aws_security_group.dynamicsg]
+  vpc_security_group_ids = "[aws_security_group.dynamicsg-${random_id.server.hex}.id]"
   associate_public_ip_address = true
   depends_on = [
     aws_key_pair.tf-key-pair,
@@ -70,9 +73,7 @@ resource "aws_security_group" "dynamicsg" {
   }
 }
 
-resource "random_id" "server" {
-  byte_length = 8
-}
+
 resource "aws_key_pair" "tf-key-pair" {
   key_name   = "tf-key-pair-${random_id.server.hex}"
   public_key = tls_private_key.rsa.public_key_openssh
