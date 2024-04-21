@@ -19,7 +19,7 @@ node ("$ENV") {
    
        stage ('Fetch GIT code'){
        dir (mainDir){
-         git poll: true, branch: "$branch", url: "https://github.com/ehteshamkhaja/ec2-instance-creation-using-terraform.git"
+         git poll: true, branch: "$branch", url: "https://github.com/ksuryaasia/ec2-terraform-ansible.git"
        }// dir
    }// stage 
     
