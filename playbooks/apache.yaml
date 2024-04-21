@@ -4,8 +4,12 @@
   hosts: vm
   become: True
   tasks:
+    - name: update packages
+      apt: 
+        update_cache: yes
+
     - name: Install Apache package
-      apt:
+      apt:  
         name: apache2
         state: present
        
@@ -34,5 +38,3 @@
       debug:
         msg: "Webpage URL : {{ url.stdout }}"
       
-        
-    
