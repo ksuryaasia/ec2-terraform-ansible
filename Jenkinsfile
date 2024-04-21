@@ -9,7 +9,7 @@ pipeline{
         }
        stage('Ansible Playbook Execution'){
          steps{    
-   #       ansiblePlaybook  credentialsId: 'devops-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/ansible/hosts', playbook: 'playbooks/apache.yaml'
+         ansiblePlaybook  credentialsId: 'devops-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/ansible/hosts', playbook: 'playbooks/apache.yaml'
         }
         } 
     }
